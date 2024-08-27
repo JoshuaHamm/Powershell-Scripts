@@ -1,0 +1,4 @@
+#Modify your distribution group name and export path
+$Everybody = Get-DynamicDistributionGroup "zzzEveryone"
+$members = Get-Recipient -RecipientPreviewFilter $Everybody.RecipientFilter -OrganizationalUnit $Everybody.RecipientContainer 
+$members | export-csv c:\nexigen\everyone.csv
