@@ -1,4 +1,6 @@
-<#Change identity to the group you wish to modify
+<#
+Goal of this script is to modify a dynamic group for all users in the organization and exclude any service accounts or system mailboxes
+Change identity to the group you wish to modify
 Change the Department values to match the departments you want to include in the group
 Change the recipient type to match the type of mailbox you want to include in the group
 #>
