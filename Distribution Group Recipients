@@ -1,4 +1,28 @@
-#Modify your distribution group name and export path
-$Everybody = Get-DynamicDistributionGroup "zzzEveryone"
-$members = Get-Recipient -RecipientPreviewFilter $Everybody.RecipientFilter -OrganizationalUnit $Everybody.RecipientContainer 
-$members | export-csv c:\nexigen\everyone.csv
+Set-DynamicDistributionGroup -Identity zzzEveryone@nexigen.com -RecipientFilter @"
+(
+    (RecipientType -eq 'UserMailbox') -and
+    (-not(Name -like 'SystemMailbox{*')) -and
+    (-not(RecipientTypeDetailsValue -eq 'MailboxPlan')) -and
+    (-not(RecipientTypeDetailsValue -eq 'DiscoveryMailbox')) -and
+    (-not(RecipientTypeDetailsValue -eq 'PublicFolderMailbox')) -and
+    (-not(RecipientTypeDetailsValue -eq 'ArbitrationMailbox')) -and
+    (-not(RecipientTypeDetailsValue -eq 'AuditLogMailbox')) -and
+    (-not(RecipientTypeDetailsValue -eq 'AuxAuditLogMailbox')) -and
+    (-not(RecipientTypeDetailsValue -eq 'SupervisoryReviewPolicyMailbox')) -and
+    (-not(RecipientTypeDetailsValue -eq 'GuestMailUser')) -and
+    (
+        Department -eq 'Senior Engineers' -or
+        Department -eq 'Human Resources' -or
+        Department -eq 'NOC' -or
+        Department -eq 'Network Operations' -or
+        Department -eq 'Service Desk' -or
+        Department -eq 'Administration' -or
+        Department -eq 'Sales' -or
+        Department -eq 'Field Service' -or
+        Department -eq 'Security' -or
+        Department -eq 'SOC' -or
+        Department -eq 'Dispatch' -or
+        Department -eq 'Engineering'
+    )
+)
+"@
