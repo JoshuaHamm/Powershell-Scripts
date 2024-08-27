@@ -5,9 +5,10 @@ Change the Department values to match the departments you want to include in the
 Change the recipient type to match the type of mailbox you want to include in the group
 #>
 
-Set-DynamicDistributionGroup -Identity zzzEveryone@nexigen.com -RecipientFilter @"
+Set-DynamicDistributionGroup -Identity "YOUR GROUP HERE REMOVE QUOTATIONS" -RecipientFilter @"
 (
     (RecipientType -eq 'UserMailbox') -and
+    (-not(RecipientTypeDetailsValue -eq 'SharedMailbox')) -and
     (-not(Name -like 'SystemMailbox{*')) -and
     (-not(RecipientTypeDetailsValue -eq 'MailboxPlan')) -and
     (-not(RecipientTypeDetailsValue -eq 'DiscoveryMailbox')) -and
